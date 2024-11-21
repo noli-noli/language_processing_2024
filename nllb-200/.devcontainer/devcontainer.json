@@ -1,0 +1,6 @@
+{
+    "name": "llama2",
+    "service": "llama2-api-server",
+    "workspaceFolder": "/src",
+    "dockerComposeFile": "../../docker-compose.yml"
+}

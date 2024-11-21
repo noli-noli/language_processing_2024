@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "PyJsonValidate",
+    "description": "sample json for json validate",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "key",
+        "context"
+    ],
+    "properties" :{
+        "key": {
+            "type": "string"
+        },
+        "context": {
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "PyJsonValidate",
+    "description": "sample json for json validate",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "default__vector_store.json",
+        "docstore.json",
+        "graph_store.json",
+        "image__vector_store.json",
+        "image_store.json",
+        "key"
+    ]
+}

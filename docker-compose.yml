@@ -1,0 +1,101 @@
+version: '3'
+
+services:
+  llama2:
+    build:
+      context: llama2/.devcontainer
+      dockerfile: dockerfile
+
+      #dockerfile内で使用する変数を渡す。
+      args:
+        - http_tmp=$http_proxy
+        - https_tmp=$https_proxy
+
+    volumes:
+      - ./llama2/src:/src
+      - /srv/models:/src/models
+    working_dir: /src
+
+    #開発を行う為ひとまずinitを実行する。
+    command: /sbin/init
+
+    #環境変数読み込む。
+    env_file:
+      - proxy.env
+
+    #ttyとprivilegedを有効化
+    privileged: true
+    tty: true
+
+    #ポートを開放
+    ports:
+      - "49152:49152"
+    #GPUを使用するための設定
+    deploy:
+      resources:
+        #コンテナが使用するRAMの上限を設定する際は以下2行をコメントアウト
+        #limits:
+        #  memory: 24G
+        reservations:
+          devices:
+            - capabilities: [gpu]
+
+    #core dumpを防ぐ為の設定
+    shm_size: 12GB
+    #コンテナネットワークの設定
+    networks:
+      - my_network
+
+
+
+  nllb-200:
+    build:
+      context: nllb-200/.devcontainer
+      dockerfile: dockerfile
+
+      #dockerfile内で使用する変数を渡す。
+      args:
+        - http_tmp=$http_proxy
+        - https_tmp=$https_proxy
+
+    volumes:
+      - ./nllb-200/src:/src
+      - /srv/models:/src/models
+    working_dir: /src
+
+    #開発を行う為ひとまずinitを実行する。
+    command: /sbin/init
+
+    #環境変数読み込む。
+    env_file:
+      - proxy.env
+
+    #ttyとprivilegedを有効化
+    privileged: true
+    tty: true
+
+    #ポートを開放
+    ports:
+      - "49153:49153"
+    #GPUを使用するための設定
+    deploy:
+      resources:
+        #コンテナが使用するRAMの上限を設定する際は以下2行をコメントアウト
+        #limits:
+        #  memory: 24G
+        reservations:
+          devices:
+            - capabilities: [gpu]
+
+    #core dumpを防ぐ為の設定
+    shm_size: 12GB
+    #コンテナネットワークの設定
+    networks:
+      - my_network
+
+
+
+# コンテナネットワークの定義
+networks:
+  my_network:  
+    driver: bridge

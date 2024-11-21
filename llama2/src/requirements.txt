@@ -1,0 +1,19 @@
+#llama.cpp
+llama-index==0.9.13
+transformers==4.35.2
+llama-cpp-python
+
+#standard llama
+transformers
+scipy
+accelerate
+bitsandbytes==0.40.2
+langchain
+faiss-gpu
+sentence-transformers
+
+#その他
+trafilatura
+fastapi
+uvicorn
+python-multipart
